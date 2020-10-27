@@ -606,11 +606,11 @@ ARM Macro Assembler    Page 10
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
 erwork --depend=slave\startup_stm32l431xx.d -oslave\startup_stm32l431xx.o -I.\R
-TE\_slave -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include -IC:\Keil_v5\ARM\
-PACK\Keil\STM32L4xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include --prede
-fine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VER
-SION SETA 525" --predefine="_RTE_ SETA 1" --predefine="STM32L431xx SETA 1" --li
-st=startup_stm32l431xx.lst startup_stm32l431xx.s
+TE\_slave -I"D:\Program File\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include" -I
+"D:\Program File\Keil_v5\ARM\PACK\Keil\STM32L4xx_DFP\2.1.0\Drivers\CMSIS\Device
+\ST\STM32L4xx\Include" --predefine="__MICROLIB SETA 1" --predefine="__UVISION_V
+ERSION SETA 525" --predefine="_RTE_ SETA 1" --predefine="STM32L431xx SETA 1" --
+list=startup_stm32l431xx.lst startup_stm32l431xx.s
 
 
 
@@ -1524,4 +1524,4 @@ Symbol: __main
       At line 176 in file startup_stm32l431xx.s
 Comment: __main used once
 2 symbols
-429 symbols in table
+428 symbols in table

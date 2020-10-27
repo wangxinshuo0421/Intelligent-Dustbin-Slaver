@@ -32,7 +32,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+#define Slave_Code 1
+#define Capture_Times 1
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -44,7 +45,6 @@
 /* USER CODE BEGIN PM */
 /* Private variables ---------------------------------------------------------*/
 uint16_t 	Channel1HighTime;
-uint16_t 	Channel1Period;
 uint8_t  	Channel1Edge = 0;
 uint16_t 	Channel1Percent;
 uint16_t	Channel1PercentTemp[3] = {0, 0, 0};
@@ -63,7 +63,7 @@ uint16_t 	Channel1RisingTimeLast=0, Channel1RisingTimeNow, Channel1FallingTime;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+int Get_free_space(int times);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -78,7 +78,7 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	
+	int distance;
   /* USER CODE END 1 */
   
 
@@ -115,11 +115,11 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+		distance = Get_free_space(Capture_Times);
+		printf("distance:%d\r\n",distance);
 		HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
-		HAL_Delay(500);
-		HAL_GPIO_WritePin(TRIG_GPIO_Port,TRIG_Pin,GPIO_PIN_SET);
-		HAL_Delay(1);
-		HAL_GPIO_WritePin(TRIG_GPIO_Port,TRIG_Pin,GPIO_PIN_RESET);
+		HAL_Delay(700);
+
   }
   /* USER CODE END 3 */
 }
@@ -177,6 +177,21 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+int Get_free_space(int times)
+{
+	int i;
+	float distance = 0;
+	for(i = 0; i < times; i++)
+	{
+		HAL_GPIO_WritePin(TRIG_GPIO_Port,TRIG_Pin,GPIO_PIN_SET);
+		HAL_Delay(1);
+		HAL_GPIO_WritePin(TRIG_GPIO_Port,TRIG_Pin,GPIO_PIN_RESET);
+		HAL_Delay(200);
+		distance += Channel1HighTime*0.017;
+	}
+	return (distance/(float)times);
+}
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
   /* Prevent unused argument(s) compilation warning */
@@ -192,21 +207,6 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 			__HAL_TIM_SET_CAPTUREPOLARITY(&htim2, TIM_CHANNEL_1, TIM_INPUTCHANNELPOLARITY_FALLING);//ÇÐ»»²¶»ñ¼«ÐÔ
 			HAL_TIM_IC_Start_IT(&htim2, TIM_CHANNEL_1);
 			Channel1Edge = 1;
-			if(Channel1RisingTimeLast == 0)
-			{
-				Channel1Period = 0;
-			}
-			else
-			{
-				if(Channel1RisingTimeNow > Channel1RisingTimeLast)
-				{
-					Channel1Period = Channel1RisingTimeNow - Channel1RisingTimeLast;
-				}
-				else
-				{
-					Channel1Period = Channel1RisingTimeNow + 0xffff - Channel1RisingTimeLast + 1;
-				}
-			}
 			Channel1RisingTimeLast = Channel1RisingTimeNow;
 		}
 		else if(Channel1Edge == 1)
@@ -222,12 +222,8 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 			else
 			{
 				Channel1HighTime = Channel1FallingTime - Channel1RisingTimeNow;
-				printf("Channel1 = %f	\r\n", (float)Channel1HighTime*0.017);
 			}
-			if(Channel1Period != 0)
-			{
-				Channel1Percent = (uint8_t)(((float)Channel1HighTime / Channel1Period) * 1000);
-			}
+			printf("timer data:%f\r\n",(float)Channel1HighTime*0.017);
 			Channel1Edge = 0;
 		}
 	}

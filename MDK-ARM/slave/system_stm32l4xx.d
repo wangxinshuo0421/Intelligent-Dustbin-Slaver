@@ -2,7 +2,7 @@ slave\system_stm32l4xx.o: ../Src/system_stm32l4xx.c
 slave\system_stm32l4xx.o: ../Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l4xx.h
 slave\system_stm32l4xx.o: ../Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l431xx.h
 slave\system_stm32l4xx.o: ../Drivers/CMSIS/Include/core_cm4.h
-slave\system_stm32l4xx.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+slave\system_stm32l4xx.o: D:\Program File\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 slave\system_stm32l4xx.o: ../Drivers/CMSIS/Include/cmsis_version.h
 slave\system_stm32l4xx.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 slave\system_stm32l4xx.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -14,7 +14,7 @@ slave\system_stm32l4xx.o: ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.
 slave\system_stm32l4xx.o: ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_def.h
 slave\system_stm32l4xx.o: ../Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l4xx.h
 slave\system_stm32l4xx.o: ../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-slave\system_stm32l4xx.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+slave\system_stm32l4xx.o: D:\Program File\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 slave\system_stm32l4xx.o: ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc_ex.h
 slave\system_stm32l4xx.o: ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_exti.h
 slave\system_stm32l4xx.o: ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio.h
