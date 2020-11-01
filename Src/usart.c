@@ -22,6 +22,11 @@
 
 /* USER CODE BEGIN 0 */
 #include "stdio.h"
+
+uint8_t USART2_RX_BUF[USART2_MAX_RECV_LEN] = {0}; 		//接收存储,最大USART3_MAX_RECV_LEN字节
+uint8_t USART2_RX_Flag = 0;		//接收完成标志
+uint8_t USART2_RX_Cnt = 0;		//接收数据计数器
+uint8_t USART2_Temp[REC_LENGTH] = {0};	//接收数据缓存
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart2;
@@ -47,7 +52,7 @@ void MX_USART2_UART_Init(void)
   {
     Error_Handler();
   }
-
+	HAL_UART_Receive_IT(&huart2,USART2_Temp,REC_LENGTH);
 }
 
 void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
@@ -154,6 +159,28 @@ int fputc(int ch, FILE *f)
 	HAL_UART_Transmit(&huart2,temp,1,2);
 	return ch;
 }
+
+//UART.c
+/**
+  * @brief 串口中断回调函数
+  * @param 调用回调函数的串口
+  * @note  串口每次收到数据以后都会关闭中断，如需重复使用，必须再次开启
+  * @retval None
+  */  
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if(huart->Instance==USART2)
+  {
+    USART2_RX_BUF[USART2_RX_Cnt] = USART2_Temp[0];
+    USART2_RX_Cnt++;
+    if(0x0a == USART2_Temp[0])
+    {
+      USART2_RX_Flag = 1;
+    }
+    HAL_UART_Receive_IT(&huart2,(uint8_t *)USART2_Temp,REC_LENGTH);
+  }
+}
+
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

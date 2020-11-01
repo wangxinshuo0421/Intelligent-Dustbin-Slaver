@@ -28,12 +28,12 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
+#include "lora.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-#define Slave_Code 1
-#define Capture_Times 1
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -78,7 +78,8 @@ int Get_free_space(int times);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	int distance;
+	int distance,temp;
+	uint8_t needAck[50];
   /* USER CODE END 1 */
   
 
@@ -105,7 +106,9 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 	HAL_TIM_IC_Start_IT(&htim2,TIM_CHANNEL_1);
-
+//	Lora_Init();
+	
+	sprintf((char*)needAck,"device:%d",Slave_Code);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -115,12 +118,15 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		distance = Get_free_space(Capture_Times);
-		printf("distance:%d\r\n",distance);
-		HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
-		HAL_Delay(700);
+		//distance = Get_free_space(Capture_Times);
+		//printf("distance:%d\r\n",distance);
+		//lora_send_cmd("hello",needAck,50);
+		printf("hello\r\n");
+		HAL_Delay(500);
+		if(lora_check_cmd(needAck))	HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+		
 
-  }
+	}
   /* USER CODE END 3 */
 }
 
@@ -223,7 +229,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 			{
 				Channel1HighTime = Channel1FallingTime - Channel1RisingTimeNow;
 			}
-			printf("timer data:%f\r\n",(float)Channel1HighTime*0.017);
+//			printf("timer data:%f\r\n",(float)Channel1HighTime*0.017);
 			Channel1Edge = 0;
 		}
 	}

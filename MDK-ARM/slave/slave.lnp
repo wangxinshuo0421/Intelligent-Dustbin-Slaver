@@ -8,6 +8,7 @@
 "slave\stm32l4xx_it.o"
 "slave\stm32l4xx_hal_msp.o"
 "slave\sr04.o"
+"slave\lora.o"
 "slave\stm32l4xx_hal_tim.o"
 "slave\stm32l4xx_hal_tim_ex.o"
 "slave\stm32l4xx_hal_uart.o"

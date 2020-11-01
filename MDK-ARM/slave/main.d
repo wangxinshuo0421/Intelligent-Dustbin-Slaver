@@ -39,3 +39,4 @@ slave\main.o: ../Inc/tim.h
 slave\main.o: ../Inc/usart.h
 slave\main.o: ../Inc/gpio.h
 slave\main.o: D:\Program File\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+slave\main.o: ../Src/lora.h

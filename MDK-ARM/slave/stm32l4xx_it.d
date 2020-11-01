@@ -35,3 +35,4 @@ slave\stm32l4xx_it.o: ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h
 slave\stm32l4xx_it.o: ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h
 slave\stm32l4xx_it.o: ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h
 slave\stm32l4xx_it.o: ../Inc/stm32l4xx_it.h
+slave\stm32l4xx_it.o: D:\Program File\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

@@ -22,19 +22,21 @@ Dialog DLL:      TCM.DLL V1.35.1.0
  
 <h2>Project:</h2>
 D:\Data File\github\Intelligent-Dustbin-Slaver\MDK-ARM\slave.uvprojx
-Project File Date:  10/27/2020
+Project File Date:  11/01/2020
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\Program File\Keil_v5\ARM\ARMCC\Bin'
 Build target 'slave'
 compiling main.c...
-../Src/main.c(226): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  			printf("timer data:%f\r\n",(float)Channel1HighTime*0.017);
-../Src/main.c: 1 warning, 0 errors
+../Src/main.c(81): warning:  #177-D: variable "distance"  was declared but never referenced
+  	int distance,temp;
+../Src/main.c(81): warning:  #177-D: variable "temp"  was declared but never referenced
+  	int distance,temp;
+../Src/main.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=13140 RO-data=500 RW-data=32 ZI-data=1360  
+Program Size: Code=10364 RO-data=500 RW-data=36 ZI-data=2388  
 FromELF: creating hex file...
-"slave\slave.axf" - 0 Error(s), 1 Warning(s).
+"slave\slave.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 

@@ -37,7 +37,25 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
+#define Slave_Code 1	//从机编号
+#define ADDRH "FF"		//设备高8位地址
+#define ADDRL "01"		//设备低8位地址
+#define POWER 3				//设备发射功率  3:  20dbm(MAX)
+#define CWMODE 0			//设备工作模式配置  0：  一般模式
+#define CHANNEL 21		//设备信道 
+#define RATE 5				//设备无线速率  5：  19.2kbps(MAX)
+#define UART_RATE	7		//串口波特率		7：  115200
+#define UART_PAR	0		//数据校验位		0：	 无校验
 
+#define Capture_Times 1
+
+#define USART2_MAX_RECV_LEN		1024					//最大接收缓存字节数
+#define REC_LENGTH 1
+
+extern uint8_t USART2_RX_BUF[USART2_MAX_RECV_LEN]; 		//接收存储,最大USART3_MAX_RECV_LEN字节
+extern uint8_t USART2_RX_Flag;		//接收完成标志
+extern uint8_t USART2_RX_Cnt;		//接收数据计数器
+extern uint8_t USART2_Temp[REC_LENGTH];	//接收数据缓存
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
